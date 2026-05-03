@@ -94,7 +94,9 @@
 <script>
 (async () => {
   await requireAuth();
-  let messages = await fetch('/api/messages').then(r => r.json());
+  const msgsRes = await fetch('/api/messages');
+  let messages = msgsRes.ok ? await msgsRes.json() : [];
+  if (!msgsRes.ok) toast('Could not load messages', 'error');
   render(messages);
 
   document.getElementById('markAllBtn').addEventListener('click', async () => {
@@ -182,7 +184,7 @@
     const badge = document.getElementById('unreadBadge');
     if (badge) { badge.textContent = count || ''; badge.style.display = count ? 'inline' : 'none'; }
   }
-  updateBadge(msgs => msgs ? msgs.filter(m => !m.read).length : 0);
+  updateBadge(messages.filter(m => !m.read).length);
 })();
 </script>
 </body>

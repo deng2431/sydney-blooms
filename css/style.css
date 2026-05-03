@@ -13,6 +13,11 @@
   --sage-light:   #EEF4EE;
   --blush:        #D4A5A5;
   --blush-light:  #F5E8E8;
+  --green-light:  #E8F5E8;
+  --green-dark:   #4A8F4A;
+  --danger:       #c0392b;
+  --danger-bg:    #fdf2f2;
+  --danger-border:#f5c6cb;
   --charcoal:     #2C2C2C;
   --charcoal-mid: #4A4A4A;
   --muted:        #7A7A7A;
@@ -307,8 +312,8 @@ p { color: var(--charcoal-mid); }
 .highlight__icon--sage  { background: var(--sage-light);  }
 .highlight__icon--sage svg  { color: var(--sage-dark); }
 
-.highlight__icon--green { background: #E8F5E8; }
-.highlight__icon--green svg { color: #4A8F4A; }
+.highlight__icon--green { background: var(--green-light); }
+.highlight__icon--green svg { color: var(--green-dark); }
 
 .highlight__icon--blush { background: var(--blush-light); }
 .highlight__icon--blush svg { color: var(--blush); }
@@ -604,6 +609,17 @@ p { color: var(--charcoal-mid); }
 .reveal-delay-1 { transition-delay: 0.1s; }
 .reveal-delay-2 { transition-delay: 0.2s; }
 .reveal-delay-3 { transition-delay: 0.3s; }
+
+/* ---- Form feedback banners ---- */
+.form__error {
+  background: var(--danger-bg);
+  border: 1px solid var(--danger-border);
+  border-radius: var(--radius);
+  padding: 1rem 1.25rem;
+  margin-bottom: 1.5rem;
+  font-size: 0.9rem;
+  color: var(--danger);
+}
 
 /* ---- Divider ---- */
 .divider {
