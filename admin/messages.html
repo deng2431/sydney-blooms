@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Messages — Sydney Blooms Admin</title>
+  <link rel="stylesheet" href="css/admin.css">
+  <style>
+    .msg-row        { cursor: pointer; }
+    .msg-row.unread td:not(.actions) { font-weight: 700; }
+    .msg-row.unread .unread-dot { display: inline-block; }
+    .unread-dot     { display: none; width: 8px; height: 8px; background: var(--sage); border-radius: 50%; margin-right: 6px; vertical-align: middle; flex-shrink: 0; }
+    .msg-expand     { display: none; background: var(--cream); }
+    .msg-expand.open { display: table-row; }
+    .msg-expand td  { padding: 1.25rem 1.5rem 1.5rem; border-top: none; }
+    .msg-body       { white-space: pre-wrap; font-size: 0.92rem; color: var(--charcoal-mid); line-height: 1.7; margin-bottom: 1rem; }
+    .msg-meta       { font-size: 0.8rem; color: var(--muted); margin-bottom: 1rem; }
+    .msg-actions    { display: flex; gap: 0.5rem; }
+    .empty-inbox    { text-align: center; padding: 4rem 2rem; color: var(--muted); }
+    .empty-inbox svg { width: 48px; height: 48px; opacity: 0.25; margin: 0 auto 1rem; }
+  </style>
+</head>
+<body>
+<div class="admin-layout">
+
+  <aside class="sidebar">
+    <div class="sidebar__brand">
+      <a href="dashboard.html" class="sidebar__logo">Sydney Blooms</a>
+      <div class="sidebar__label">Admin Panel</div>
+    </div>
+    <nav class="sidebar__nav">
+      <div class="sidebar__section-label">Manage</div>
+      <a href="dashboard.html" class="sidebar__link">
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5"><path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6A2.25 2.25 0 016 3.75h2.25A2.25 2.25 0 0110.5 6v2.25a2.25 2.25 0 01-2.25 2.25H6a2.25 2.25 0 01-2.25-2.25V6zM3.75 15.75A2.25 2.25 0 016 13.5h2.25a2.25 2.25 0 012.25 2.25V18a2.25 2.25 0 01-2.25 2.25H6A2.25 2.25 0 013.75 18v-2.25zM13.5 6a2.25 2.25 0 012.25-2.25H18A2.25 2.25 0 0120.25 6v2.25A2.25 2.25 0 0118 10.5h-2.25a2.25 2.25 0 01-2.25-2.25V6zM13.5 15.75a2.25 2.25 0 012.25-2.25H18a2.25 2.25 0 012.25 2.25V18A2.25 2.25 0 0118 20.25h-2.25A2.25 2.25 0 0113.5 18v-2.25z" /></svg>
+        Dashboard
+      </a>
+      <a href="products.html" class="sidebar__link">
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5"><path stroke-linecap="round" stroke-linejoin="round" d="M2.25 3h1.386c.51 0 .955.343 1.087.835l.383 1.437M7.5 14.25a3 3 0 00-3 3h15.75m-12.75-3h11.218c1.121-2.3 2.1-4.684 2.924-7.138a60.114 60.114 0 00-16.536-1.84M7.5 14.25L5.106 5.272M6 20.25a.75.75 0 11-1.5 0 .75.75 0 011.5 0zm12.75 0a.75.75 0 11-1.5 0 .75.75 0 011.5 0z" /></svg>
+        Products
+      </a>
+      <a href="content.html" class="sidebar__link">
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5"><path stroke-linecap="round" stroke-linejoin="round" d="M16.862 4.487l1.687-1.688a1.875 1.875 0 112.652 2.652L10.582 16.07a4.5 4.5 0 01-1.897 1.13L6 18l.8-2.685a4.5 4.5 0 011.13-1.897l8.932-8.931zm0 0L19.5 7.125M18 14v4.75A2.25 2.25 0 0115.75 21H5.25A2.25 2.25 0 013 18.75V8.25A2.25 2.25 0 015.25 6H10" /></svg>
+        Page Content
+      </a>
+      <a href="contact.html" class="sidebar__link">
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5"><path stroke-linecap="round" stroke-linejoin="round" d="M15 10.5a3 3 0 11-6 0 3 3 0 016 0z" /><path stroke-linecap="round" stroke-linejoin="round" d="M19.5 10.5c0 7.142-7.5 11.25-7.5 11.25S4.5 17.642 4.5 10.5a7.5 7.5 0 1115 0z" /></svg>
+        Contact Info
+      </a>
+      <a href="messages.html" class="sidebar__link">
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5"><path stroke-linecap="round" stroke-linejoin="round" d="M21.75 6.75v10.5a2.25 2.25 0 01-2.25 2.25h-15a2.25 2.25 0 01-2.25-2.25V6.75m19.5 0A2.25 2.25 0 0019.5 4.5h-15a2.25 2.25 0 00-2.25 2.25m19.5 0v.243a2.25 2.25 0 01-1.07 1.916l-7.5 4.615a2.25 2.25 0 01-2.36 0L3.32 8.91a2.25 2.25 0 01-1.07-1.916V6.75" /></svg>
+        Messages
+        <span class="sidebar__badge" id="unreadBadge"></span>
+      </a>
+    </nav>
+    <div class="sidebar__footer">
+      <a href="/" target="_blank" class="sidebar__view-site">
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5"><path stroke-linecap="round" stroke-linejoin="round" d="M13.5 6H5.25A2.25 2.25 0 003 8.25v10.5A2.25 2.25 0 005.25 21h10.5A2.25 2.25 0 0018 18.75V10.5m-10.5 6L21 3m0 0h-5.25M21 3v5.25" /></svg>
+        View live site
+      </a>
+      <button id="logoutBtn" class="sidebar__logout">
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5"><path stroke-linecap="round" stroke-linejoin="round" d="M15.75 9V5.25A2.25 2.25 0 0013.5 3h-6a2.25 2.25 0 00-2.25 2.25v13.5A2.25 2.25 0 007.5 21h6a2.25 2.25 0 002.25-2.25V15M12 9l-3 3m0 0l3 3m-3-3h12.75" /></svg>
+        Log out
+      </button>
+    </div>
+  </aside>
+
+  <div class="main">
+    <header class="main-header">
+      <h1>Messages</h1>
+      <button class="btn btn-outline btn-sm" id="markAllBtn">Mark all as read</button>
+    </header>
+    <div class="main-body">
+      <div class="table-wrap">
+        <table class="table" id="messagesTable">
+          <thead>
+            <tr>
+              <th style="width:12px"></th>
+              <th>From</th>
+              <th>Subject</th>
+              <th>Date</th>
+              <th>Actions</th>
+            </tr>
+          </thead>
+          <tbody id="messagesList">
+            <tr class="empty-row"><td colspan="5">Loading…</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="toast"></div>
+<script src="js/admin.js"></script>
+<script>
+(async () => {
+  await requireAuth();
+  const msgsRes = await fetch('/api/messages');
+  let messages = msgsRes.ok ? await msgsRes.json() : [];
+  if (!msgsRes.ok) toast('Could not load messages', 'error');
+  render(messages);
+
+  document.getElementById('markAllBtn').addEventListener('click', async () => {
+    await fetch('/api/messages/read-all', { method: 'PUT' });
+    messages = messages.map(m => ({ ...m, read: true }));
+    render(messages);
+    updateBadge(0);
+    toast('All messages marked as read');
+  });
+
+  function fmt(dateStr) {
+    return new Date(dateStr).toLocaleDateString('en-AU', { day: 'numeric', month: 'short', year: 'numeric' });
+  }
+
+  function render(msgs) {
+    const tbody = document.getElementById('messagesList');
+    if (!msgs.length) {
+      tbody.innerHTML = `
+        <tr><td colspan="5">
+          <div class="empty-inbox">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1"><path stroke-linecap="round" stroke-linejoin="round" d="M21.75 6.75v10.5a2.25 2.25 0 01-2.25 2.25h-15a2.25 2.25 0 01-2.25-2.25V6.75m19.5 0A2.25 2.25 0 0019.5 4.5h-15a2.25 2.25 0 00-2.25 2.25m19.5 0v.243a2.25 2.25 0 01-1.07 1.916l-7.5 4.615a2.25 2.25 0 01-2.36 0L3.32 8.91a2.25 2.25 0 01-1.07-1.916V6.75" /></svg>
+            <p>No messages yet. Enquiries from your contact form will appear here.</p>
+          </div>
+        </td></tr>`;
+      return;
+    }
+
+    tbody.innerHTML = msgs.map(m => `
+      <tr class="msg-row ${m.read ? '' : 'unread'}" data-id="${m.id}" onclick="toggleMsg(${m.id})">
+        <td><span class="unread-dot"></span></td>
+        <td>
+          <strong>${esc(m.name)}</strong><br>
+          <span style="font-size:0.82rem;color:var(--muted)">${esc(m.email)}</span>
+        </td>
+        <td>${esc(m.subject || '(no subject)')}</td>
+        <td style="white-space:nowrap">${fmt(m.created_at)}</td>
+        <td class="actions" onclick="event.stopPropagation()">
+          <button class="btn btn-ghost btn-sm" onclick="deleteMsg(${m.id})">Delete</button>
+        </td>
+      </tr>
+      <tr class="msg-expand" id="expand-${m.id}">
+        <td colspan="5">
+          <div class="msg-meta">${m.phone ? 'Phone: ' + esc(m.phone) + ' &nbsp;·&nbsp; ' : ''}Sent ${fmt(m.created_at)}</div>
+          <div class="msg-body">${esc(m.message)}</div>
+          <div class="msg-actions">
+            ${!m.read ? `<button class="btn btn-outline btn-sm" onclick="markRead(${m.id})">Mark as read</button>` : ''}
+            <button class="btn btn-danger btn-sm" onclick="deleteMsg(${m.id})">Delete</button>
+          </div>
+        </td>
+      </tr>
+    `).join('');
+  }
+
+  function esc(s) {
+    if (!s) return '';
+    return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+  }
+
+  window.toggleMsg = async function(id) {
+    const expand = document.getElementById(`expand-${id}`);
+    const isOpen = expand.classList.toggle('open');
+    if (isOpen) {
+      const msg = messages.find(m => m.id === id);
+      if (msg && !msg.read) await markRead(id);
+    }
+  };
+
+  window.markRead = async function(id) {
+    await fetch(`/api/messages/${id}/read`, { method: 'PUT' });
+    messages = messages.map(m => m.id === id ? { ...m, read: true } : m);
+    render(messages);
+    updateBadge(messages.filter(m => !m.read).length);
+  };
+
+  window.deleteMsg = async function(id) {
+    if (!confirm('Delete this message? This cannot be undone.')) return;
+    await fetch(`/api/messages/${id}`, { method: 'DELETE' });
+    messages = messages.filter(m => m.id !== id);
+    render(messages);
+    updateBadge(messages.filter(m => !m.read).length);
+    toast('Message deleted');
+  };
+
+  function updateBadge(count) {
+    const badge = document.getElementById('unreadBadge');
+    if (badge) { badge.textContent = count || ''; badge.style.display = count ? 'inline' : 'none'; }
+  }
+  updateBadge(messages.filter(m => !m.read).length);
+})();
+</script>
+</body>
+</html>

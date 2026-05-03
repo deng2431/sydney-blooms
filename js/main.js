@@ -59,22 +59,63 @@ const revealObserver = new IntersectionObserver(
 );
 document.querySelectorAll('.reveal').forEach(el => revealObserver.observe(el));
 
-/* ---- Contact form: basic client-side validation ---- */
+/* ---- Contact form: submit via API ---- */
 const form = document.getElementById('contactForm');
 if (form) {
-  form.addEventListener('submit', (e) => {
-    let valid = true;
+  form.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    const btn       = document.getElementById('contactSubmit');
+    const errorBox  = document.getElementById('formError');
+    const successBox = document.getElementById('formSuccess');
+
+    // Reset state
+    errorBox.style.display  = 'none';
+    successBox.style.display = 'none';
+    form.querySelectorAll('.form__input, .form__textarea').forEach(f => f.style.borderColor = '');
+
+    // Client-side required check
+    let firstInvalid = null;
     form.querySelectorAll('[required]').forEach(field => {
       if (!field.value.trim()) {
         field.style.borderColor = 'var(--blush)';
-        valid = false;
-      } else {
-        field.style.borderColor = '';
+        firstInvalid = firstInvalid || field;
       }
     });
-    if (!valid) {
-      e.preventDefault();
-      form.querySelector('[required]:invalid, [required]')?.focus();
+    if (firstInvalid) { firstInvalid.focus(); return; }
+
+    // Submit
+    btn.disabled = true;
+    btn.textContent = 'Sending…';
+
+    try {
+      const res  = await fetch('/api/messages', {
+        method:  'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body:    JSON.stringify({
+          name:    form.name.value.trim(),
+          email:   form.email.value.trim(),
+          phone:   form.phone?.value.trim(),
+          subject: form.subject?.value.trim(),
+          message: form.message.value.trim(),
+        }),
+      });
+      const json = await res.json();
+      if (json.ok) {
+        form.reset();
+        form.style.display   = 'none';
+        successBox.style.display = 'block';
+        successBox.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      } else {
+        errorBox.textContent  = json.error || 'Something went wrong. Please try again.';
+        errorBox.style.display = 'block';
+        btn.disabled   = false;
+        btn.textContent = 'Send Message';
+      }
+    } catch {
+      errorBox.textContent  = 'Could not reach the server. Please try again later.';
+      errorBox.style.display = 'block';
+      btn.disabled   = false;
+      btn.textContent = 'Send Message';
     }
   });
 }

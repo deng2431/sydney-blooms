@@ -21,6 +21,18 @@ function toast(msg, type = 'success') {
 async function requireAuth() {
   const res = await fetch('/api/auth/check');
   if (res.status === 401) { location.href = '/admin/index.html'; }
+  loadUnreadCount();
+}
+
+/* ---- Unread message badge ---- */
+async function loadUnreadCount() {
+  try {
+    const res = await fetch('/api/messages/unread-count');
+    if (!res.ok) return;
+    const { count } = await res.json();
+    const badge = document.getElementById('unreadBadge');
+    if (badge) { badge.textContent = count || ''; badge.style.display = count ? 'inline' : 'none'; }
+  } catch {}
 }
 
 /* ---- Logout ---- */
