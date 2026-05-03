@@ -345,6 +345,19 @@ img { display: block; max-width: 100%; }
 .modal-body { padding: 1.25rem 1.75rem 1.75rem; }
 .modal-footer { display: flex; gap: 0.75rem; justify-content: flex-end; padding-top: 1rem; border-top: 1px solid var(--border); margin-top: 1rem; }
 
+/* Sidebar unread badge */
+.sidebar__badge {
+  margin-left: auto;
+  background: var(--blush);
+  color: var(--white);
+  border-radius: 10px;
+  padding: 1px 7px;
+  font-size: 0.68rem;
+  font-weight: 700;
+  display: none;
+}
+.sidebar__badge:not(:empty) { display: inline; }
+
 /* Image preview in product form */
 .img-preview { width: 100%; aspect-ratio: 4/3; object-fit: cover; border-radius: var(--radius); border: 1px solid var(--border); margin-bottom: 0.75rem; display: none; }
 .img-preview.show { display: block; }

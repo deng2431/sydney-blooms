@@ -109,13 +109,17 @@
         <!-- ===== CONTACT FORM ===== -->
         <section class="form" aria-labelledby="form-heading">
           <h2 id="form-heading" class="form__title reveal"><em>Send us a message</em></h2>
-          <!--
-            UPDATE: To receive emails from this form, either:
-            (a) Change the action to "mailto:your@email.com" — opens user's email client
-            (b) Sign up at formspree.io and replace action with your Formspree endpoint, e.g.:
-                action="https://formspree.io/f/XXXXXXXX" method="POST"
-          -->
-          <form id="contactForm" action="mailto:hello@sydneyblooms.com.au" method="POST" enctype="text/plain" novalidate>
+
+          <!-- Success state -->
+          <div id="formSuccess" role="alert" style="display:none; background:var(--sage-light); border:1px solid var(--sage); border-radius:8px; padding:1.5rem; margin-bottom:1.5rem;">
+            <strong style="color:var(--sage-dark); display:block; margin-bottom:0.4rem;">Message sent!</strong>
+            <span style="font-size:0.92rem; color:var(--charcoal-mid);">Thank you — we'll get back to you within one business day.</span>
+          </div>
+
+          <!-- Error banner -->
+          <div id="formError" role="alert" style="display:none; background:#fdf2f2; border:1px solid #f5c6cb; border-radius:8px; padding:1rem 1.25rem; margin-bottom:1.5rem; font-size:0.9rem; color:#c0392b;"></div>
+
+          <form id="contactForm" novalidate>
 
             <div class="form__group reveal">
               <label class="form__label" for="name">Your Name</label>
@@ -143,7 +147,7 @@
             </div>
 
             <div class="reveal">
-              <button type="submit" class="btn btn--primary btn--lg" style="width: 100%;">Send Message</button>
+              <button type="submit" id="contactSubmit" class="btn btn--primary btn--lg" style="width: 100%;">Send Message</button>
             </div>
 
           </form>

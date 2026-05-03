@@ -13,6 +13,7 @@ app.use('/api/auth',     require('./server/routes/auth'));
 app.use('/api/products', require('./server/routes/products'));
 app.use('/api/content',  require('./server/routes/content'));
 app.use('/api/contact',  require('./server/routes/contact'));
+app.use('/api/messages', require('./server/routes/messages'));
 
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {
