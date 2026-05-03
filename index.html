@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sydney Blooms — Fresh Flowers, Sydney</title>
+  <meta name="description" content="Sydney's finest hand-tied bouquets. Fresh, locally sourced flowers delivered across Sydney. Bouquets, wedding arrangements, and seasonal bunches.">
+  <meta property="og:title" content="Sydney Blooms — Fresh Flowers, Sydney">
+  <meta property="og:description" content="Sydney's finest hand-tied bouquets, delivered with love.">
+  <meta property="og:image" content="images/hero.jpg">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;1,400;1,600&family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+  <!-- ===== NAVIGATION ===== -->
+  <nav class="nav nav--light" id="nav" aria-label="Main navigation">
+    <div class="container nav__inner">
+      <a href="index.html" class="nav__logo">Sydney Blooms</a>
+      <button class="nav__toggle" id="navToggle" aria-label="Open menu" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+      <ul class="nav__links" id="navLinks">
+        <li><a href="index.html"   class="nav__link">Home</a></li>
+        <li><a href="shop.html"    class="nav__link">Shop</a></li>
+        <li><a href="about.html"   class="nav__link">About</a></li>
+        <li><a href="contact.html" class="nav__link">Contact</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <!-- ===== HERO ===== -->
+  <section class="hero" aria-label="Welcome">
+    <div class="hero__bg" style="background-image: url('images/hero.jpg');" role="img" aria-label="Beautiful fresh flower arrangement"></div>
+    <div class="hero__overlay"></div>
+    <div class="container hero__content">
+      <p class="eyebrow hero__eyebrow">Welcome to Sydney Blooms</p>
+      <h1 class="hero__title"><em>Fresh. Curated.<br>Delivered.</em></h1>
+      <p class="hero__subtitle">Sydney's finest hand-tied bouquets, crafted with love</p>
+      <a href="shop.html" class="btn btn--primary btn--lg">Explore Our Flowers</a>
+    </div>
+  </section>
+
+  <!-- ===== HIGHLIGHTS ===== -->
+  <section class="highlights" aria-label="Our promise">
+    <div class="container">
+      <div class="highlights__grid">
+
+        <div class="highlight reveal reveal-delay-1">
+          <div class="highlight__icon">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5" aria-hidden="true">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M8.25 18.75a1.5 1.5 0 01-3 0m3 0a1.5 1.5 0 00-3 0m3 0h6m-9 0H3.375a1.125 1.125 0 01-1.125-1.125V14.25m17.25 4.5a1.5 1.5 0 01-3 0m3 0a1.5 1.5 0 00-3 0m3 0h1.125c.621 0 1.129-.504 1.09-1.124a17.902 17.902 0 00-3.213-9.193 2.056 2.056 0 00-1.58-.86H14.25M16.5 18.75h-2.25m0-11.177v-.958c0-.568-.422-1.048-.987-1.106a48.554 48.554 0 00-10.026 0 1.106 1.106 0 00-.987 1.106v7.635m12-6.677v6.677m0 4.5v-4.5m0 0h-12" />
+            </svg>
+          </div>
+          <h3>Same-Day Delivery</h3>
+          <p>Order before noon for delivery across Sydney today.</p>
+        </div>
+
+        <div class="highlight reveal reveal-delay-2">
+          <div class="highlight__icon">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5" aria-hidden="true">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M12 3v2.25m6.364.386l-1.591 1.591M21 12h-2.25m-.386 6.364l-1.591-1.591M12 18.75V21m-4.773-4.227l-1.591 1.591M5.25 12H3m4.227-4.773L5.636 5.636M15.75 12a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0z" />
+            </svg>
+          </div>
+          <h3>Locally Sourced</h3>
+          <p>Seasonal blooms from Sydney's finest local growers.</p>
+        </div>
+
+        <div class="highlight reveal reveal-delay-3">
+          <div class="highlight__icon">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5" aria-hidden="true">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M9.813 15.904L9 18.75l-.813-2.846a4.5 4.5 0 00-3.09-3.09L2.25 12l2.846-.813a4.5 4.5 0 003.09-3.09L9 5.25l.813 2.846a4.5 4.5 0 003.09 3.09L15.75 12l-2.846.813a4.5 4.5 0 00-3.09 3.09z" />
+            </svg>
+          </div>
+          <h3>Bespoke Arrangements</h3>
+          <p>Every bouquet crafted by hand to your exact vision.</p>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== FEATURED PRODUCTS ===== -->
+  <section class="section" aria-labelledby="featured-heading">
+    <div class="container">
+      <div class="section__header">
+        <p class="eyebrow">Our Collection</p>
+        <h2 id="featured-heading">Flowers for Every Occasion</h2>
+        <p>Whether it's a heartfelt gift, a grand celebration, or simply to brighten your home — we have the perfect arrangement.</p>
+      </div>
+      <div class="card-grid">
+
+        <article class="card reveal reveal-delay-1">
+          <div class="card__img-wrap">
+            <img src="images/bouquet-1.jpg" alt="Classic white bouquet" class="card__img" loading="lazy">
+          </div>
+          <div class="card__body">
+            <p class="card__tag">Bouquets</p>
+            <h3 class="card__title">Classic White Bouquet</h3>
+            <p class="card__desc">Timeless white roses and peonies, hand-tied with a satin ribbon. Perfect for any occasion.</p>
+            <div class="card__footer">
+              <span class="card__price">From $65</span>
+              <a href="shop.html" class="btn btn--outline btn--sm">View All</a>
+            </div>
+          </div>
+        </article>
+
+        <article class="card reveal reveal-delay-2">
+          <div class="card__img-wrap">
+            <img src="images/wedding-1.jpg" alt="Elegant wedding arrangement" class="card__img" loading="lazy">
+          </div>
+          <div class="card__body">
+            <p class="card__tag">Weddings</p>
+            <h3 class="card__title">Bridal Collection</h3>
+            <p class="card__desc">From bridal bouquets to table centrepieces — let us make your special day unforgettable.</p>
+            <div class="card__footer">
+              <span class="card__price">From $320</span>
+              <a href="shop.html#wedding" class="btn btn--outline btn--sm">Explore</a>
+            </div>
+          </div>
+        </article>
+
+        <article class="card reveal reveal-delay-3">
+          <div class="card__img-wrap">
+            <img src="images/seasonal-1.jpg" alt="Seasonal spring flowers" class="card__img" loading="lazy">
+          </div>
+          <div class="card__body">
+            <p class="card__tag">Seasonal</p>
+            <h3 class="card__title">Seasonal Bunches</h3>
+            <p class="card__desc">The freshest blooms of the season — vibrant, fragrant, and always surprising.</p>
+            <div class="card__footer">
+              <span class="card__price">From $45</span>
+              <a href="shop.html#seasonal" class="btn btn--outline btn--sm">Shop Now</a>
+            </div>
+          </div>
+        </article>
+
+      </div>
+      <div style="text-align:center; margin-top: 3rem;">
+        <a href="shop.html" class="btn btn--dark">View Full Collection</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== BANNER / CTA ===== -->
+  <section style="background: var(--sage-light); padding-block: 5rem; text-align: center;">
+    <div class="container">
+      <p class="eyebrow reveal">Custom Orders Welcome</p>
+      <h2 class="reveal" style="font-style:italic; max-width: 540px; margin: 1rem auto 1.5rem;">Have something special in mind?</h2>
+      <p class="reveal" style="max-width: 420px; margin-inline: auto; margin-bottom: 2rem;">Tell us your vision and our florists will bring it to life. We love a creative challenge.</p>
+      <a href="contact.html" class="btn btn--primary btn--lg reveal">Get in Touch</a>
+    </div>
+  </section>
+
+  <!-- ===== FOOTER ===== -->
+  <footer class="footer" aria-label="Site footer">
+    <div class="container">
+      <div class="footer__inner">
+        <div class="footer__brand">
+          <a href="index.html" class="footer__logo">Sydney Blooms</a>
+          <p>Fresh, locally sourced flowers for every occasion. Proudly based in Sydney, NSW.</p>
+        </div>
+        <div>
+          <p class="footer__heading">Navigate</p>
+          <ul class="footer__links">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="shop.html">Shop</a></li>
+            <li><a href="about.html">About</a></li>
+            <li><a href="contact.html">Contact</a></li>
+          </ul>
+        </div>
+        <div>
+          <p class="footer__heading">Get in Touch</p>
+          <ul class="footer__links">
+            <li><a href="tel:+610200000000">(02) XXXX XXXX</a></li>
+            <li><a href="mailto:hello@sydneyblooms.com.au">hello@sydneyblooms.com.au</a></li>
+            <li>Your Address, Sydney NSW</li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer__bottom">
+        <span>&copy; 2025 Sydney Blooms. All rights reserved.</span>
+        <span>Made with love in Sydney</span>
+      </div>
+    </div>
+  </footer>
+
+  <script src="js/main.js"></script>
+</body>
+</html>
