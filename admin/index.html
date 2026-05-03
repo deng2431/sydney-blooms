@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Admin Login — Sydney Blooms</title>
+  <link rel="stylesheet" href="css/admin.css">
+  <style>
+    .field-group { text-align: left; margin-bottom: 1.25rem; }
+    .show-pass   { display: flex; align-items: center; gap: 0.5rem; font-size: 0.82rem; color: var(--muted); cursor: pointer; margin-top: 0.75rem; }
+    .show-pass input { width: auto; margin: 0; }
+  </style>
+</head>
+<body>
+  <div class="login-wrap">
+    <div class="login-card">
+      <div class="login-logo">Sydney Blooms</div>
+      <div class="login-sub">Admin Panel</div>
+
+      <h1>Welcome back</h1>
+      <div id="loginAlert" class="alert"></div>
+
+      <form id="loginForm" autocomplete="on">
+        <div class="field-group">
+          <label class="form-label" for="username">Username</label>
+          <input class="form-input" type="text" id="username" name="username" required autocomplete="username" placeholder="admin">
+        </div>
+        <div class="field-group">
+          <label class="form-label" for="password">Password</label>
+          <input class="form-input" type="password" id="password" name="password" required autocomplete="current-password" placeholder="••••••••">
+        </div>
+        <label class="show-pass">
+          <input type="checkbox" onchange="document.getElementById('password').type = this.checked ? 'text' : 'password'">
+          Show password
+        </label>
+        <button type="submit" class="btn btn-primary" style="width:100%; margin-top:1.5rem; justify-content:center; padding:0.85rem;">
+          Log In
+        </button>
+      </form>
+    </div>
+  </div>
+  <script src="js/admin.js"></script>
+</body>
+</html>

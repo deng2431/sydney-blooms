@@ -36,9 +36,9 @@
     <div class="hero__bg" style="background-image: url('images/hero.jpg');" role="img" aria-label="Beautiful fresh flower arrangement"></div>
     <div class="hero__overlay"></div>
     <div class="container hero__content">
-      <p class="eyebrow hero__eyebrow">Welcome to Sydney Blooms</p>
-      <h1 class="hero__title"><em>Fresh. Curated.<br>Delivered.</em></h1>
-      <p class="hero__subtitle">Sydney's finest hand-tied bouquets, crafted with love</p>
+      <p class="eyebrow hero__eyebrow" data-content="hero_eyebrow">Welcome to Sydney Blooms</p>
+      <h1 class="hero__title"><em data-content="hero_title">Fresh. Curated.<br>Delivered.</em></h1>
+      <p class="hero__subtitle" data-content="hero_subtitle">Sydney's finest hand-tied bouquets, crafted with love</p>
       <a href="shop.html" class="btn btn--primary btn--lg">Explore Our Flowers</a>
     </div>
   </section>
@@ -90,53 +90,8 @@
         <h2 id="featured-heading">Flowers for Every Occasion</h2>
         <p>Whether it's a heartfelt gift, a grand celebration, or simply to brighten your home — we have the perfect arrangement.</p>
       </div>
-      <div class="card-grid">
-
-        <article class="card reveal reveal-delay-1">
-          <div class="card__img-wrap">
-            <img src="images/bouquet-1.jpg" alt="Classic white bouquet" class="card__img" loading="lazy">
-          </div>
-          <div class="card__body">
-            <p class="card__tag">Bouquets</p>
-            <h3 class="card__title">Classic White Bouquet</h3>
-            <p class="card__desc">Timeless white roses and peonies, hand-tied with a satin ribbon. Perfect for any occasion.</p>
-            <div class="card__footer">
-              <span class="card__price">From $65</span>
-              <a href="shop.html" class="btn btn--outline btn--sm">View All</a>
-            </div>
-          </div>
-        </article>
-
-        <article class="card reveal reveal-delay-2">
-          <div class="card__img-wrap">
-            <img src="images/wedding-1.jpg" alt="Elegant wedding arrangement" class="card__img" loading="lazy">
-          </div>
-          <div class="card__body">
-            <p class="card__tag">Weddings</p>
-            <h3 class="card__title">Bridal Collection</h3>
-            <p class="card__desc">From bridal bouquets to table centrepieces — let us make your special day unforgettable.</p>
-            <div class="card__footer">
-              <span class="card__price">From $320</span>
-              <a href="shop.html#wedding" class="btn btn--outline btn--sm">Explore</a>
-            </div>
-          </div>
-        </article>
-
-        <article class="card reveal reveal-delay-3">
-          <div class="card__img-wrap">
-            <img src="images/seasonal-1.jpg" alt="Seasonal spring flowers" class="card__img" loading="lazy">
-          </div>
-          <div class="card__body">
-            <p class="card__tag">Seasonal</p>
-            <h3 class="card__title">Seasonal Bunches</h3>
-            <p class="card__desc">The freshest blooms of the season — vibrant, fragrant, and always surprising.</p>
-            <div class="card__footer">
-              <span class="card__price">From $45</span>
-              <a href="shop.html#seasonal" class="btn btn--outline btn--sm">Shop Now</a>
-            </div>
-          </div>
-        </article>
-
+      <div class="card-grid" id="featuredGrid">
+        <!-- Populated dynamically from /api/products -->
       </div>
       <div style="text-align:center; margin-top: 3rem;">
         <a href="shop.html" class="btn btn--dark">View Full Collection</a>
@@ -188,5 +143,6 @@
   </footer>
 
   <script src="js/main.js"></script>
+  <script src="js/content-loader.js"></script>
 </body>
 </html>
