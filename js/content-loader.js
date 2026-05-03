@@ -1,41 +1,49 @@
 /* ============================================================
    SYDNEY BLOOMS — Dynamic content loader for public pages
+   Keys are authoritative from content-schema.js
    ============================================================ */
 
 async function loadPageContent() {
   try {
     const [content, contact, products] = await Promise.all([
-      fetch('/api/content').then(r => r.json()),
-      fetch('/api/contact').then(r => r.json()),
-      fetch('/api/products').then(r => r.json()),
+      fetch('/api/content').then(r => r.ok ? r.json() : {}),
+      fetch('/api/contact').then(r => r.ok ? r.json() : {}),
+      fetch('/api/products').then(r => r.ok ? r.json() : []),
     ]);
 
-    // Fill elements that have data-content attributes
+    // Merge both stores; contact keys never collide with content keys
+    const all = { ...content, ...contact };
+
     document.querySelectorAll('[data-content]').forEach(el => {
       const key = el.dataset.content;
-      const val = content[key] ?? contact[key];
-      if (val !== undefined) el.textContent = val;
+      const schema = CONTENT_SCHEMA[key] || CONTACT_SCHEMA[key];
+      const val = all[key] ?? schema?.fallback;
+      if (val !== undefined && val !== null) el.textContent = val;
+      else if (schema === undefined) console.warn(`[content-loader] unknown key: "${key}"`);
     });
 
-    // Render product grids if present
     renderProducts(products);
-  } catch {
-    // Server not running — page still renders with fallback HTML
+  } catch (err) {
+    console.error('[content-loader] failed to load:', err);
   }
 }
 
 function makeCard(p, linkHref) {
+  const name  = String(p.name || '').replace(/</g, '&lt;');
+  const desc  = String(p.description || '').replace(/</g, '&lt;');
+  const price = String(p.price || '');
+  const tag   = p.tag ? `<p class="card__tag">${String(p.tag).replace(/</g,'&lt;')}</p>` : '';
   return `
     <article class="card reveal">
       <div class="card__img-wrap">
-        <img src="${p.image_path || ''}" alt="${p.name}" class="card__img" loading="lazy">
+        <img src="${p.image_path || ''}" alt="${name}" class="card__img" loading="lazy">
       </div>
       <div class="card__body">
-        ${p.tag ? `<p class="card__tag">${p.tag}</p>` : ''}
-        <h3 class="card__title">${p.name}</h3>
-        <p class="card__desc">${p.description || ''}</p>
+        ${tag}
+        <h3 class="card__title">${name}</h3>
+        <p class="card__desc">${desc}</p>
         <div class="card__footer">
-          <span class="card__price">${p.price || ''}</span>
+          <span class="card__price">${price}</span>
           <a href="${linkHref}" class="btn btn--outline btn--sm">Enquire</a>
         </div>
       </div>
@@ -43,18 +51,15 @@ function makeCard(p, linkHref) {
 }
 
 function renderProducts(products) {
-  // Home page: one featured card per category
   const featuredGrid = document.getElementById('featuredGrid');
   if (featuredGrid) {
-    const categories = ['bouquet', 'wedding', 'seasonal'];
-    const featured = categories
+    const featured = ['bouquet', 'wedding', 'seasonal']
       .map(cat => products.find(p => p.category === cat))
       .filter(Boolean);
     featuredGrid.innerHTML = featured.map(p => makeCard(p, 'contact.html')).join('');
     observeReveal();
   }
 
-  // Shop page: grouped by category
   ['bouquet', 'wedding', 'seasonal'].forEach(cat => {
     const grid = document.getElementById(`grid-${cat}`);
     if (!grid) return;
@@ -68,7 +73,9 @@ function renderProducts(products) {
 
 function observeReveal() {
   const obs = new IntersectionObserver(
-    entries => entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); obs.unobserve(e.target); } }),
+    entries => entries.forEach(e => {
+      if (e.isIntersecting) { e.target.classList.add('visible'); obs.unobserve(e.target); }
+    }),
     { threshold: 0.12, rootMargin: '0px 0px -40px 0px' }
   );
   document.querySelectorAll('.reveal:not(.visible)').forEach(el => obs.observe(el));
