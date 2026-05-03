@@ -293,17 +293,25 @@ p { color: var(--charcoal-mid); }
   transform: translateY(-4px);
 }
 .highlight__icon {
-  width: 64px;
-  height: 64px;
+  width: 72px;
+  height: 72px;
   margin-inline: auto;
   margin-bottom: 1.25rem;
-  background: var(--blush-light);
   border-radius: 50%;
   display: flex;
   align-items: center;
   justify-content: center;
 }
-.highlight__icon svg { width: 30px; height: 30px; color: var(--blush); }
+.highlight__icon svg { width: 34px; height: 34px; }
+
+.highlight__icon--sage  { background: var(--sage-light);  }
+.highlight__icon--sage svg  { color: var(--sage-dark); }
+
+.highlight__icon--green { background: #E8F5E8; }
+.highlight__icon--green svg { color: #4A8F4A; }
+
+.highlight__icon--blush { background: var(--blush-light); }
+.highlight__icon--blush svg { color: var(--blush); }
 .highlight h3 { font-size: 1.1rem; margin-bottom: 0.5rem; }
 .highlight p  { font-size: 0.92rem; color: var(--muted); }
 
